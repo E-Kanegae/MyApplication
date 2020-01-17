@@ -1,0 +1,27 @@
+spring:
+  profiles: dev
+# messages
+  messages:
+    basename: i18n.messages-dev
+    fallback-to-system-locale: true
+    encoding: UTF-8
+  
+# Spring Security
+  security:
+    user: 
+      password: password
+  
+# If you use the Mongo 3.0 Java driver, spring.data.mongodb.host and spring.data.mongodb.port are not supported. 
+# In such cases, spring.data.mongodb.uri should be used to provide all of the configuration.
+# Settings for Spring Data MongoDB
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/devrecorddb
+      username: mongo
+      password: mongo
+
+# THYMELEAF (ThymeleafAutoConfiguration)
+  thymeleaf:
+    enabled: true
+    cache: false
+    enable-spring-el-compiler: true

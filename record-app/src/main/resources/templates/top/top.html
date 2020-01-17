@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.tymeleaf.org">
+<head>
+<title>E-Kanegae Record Application Top</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<!-- <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"
+	rel="stylesheet" /> -->
+
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link
+	th:href="@{/webjars/mdbootstrap-bootstrap-material-design/4.8.8/css/bootstrap.min.css}"
+	rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link
+	th:href="@{/webjars/mdbootstrap-bootstrap-material-design/4.8.8/css/mdb.min.css}"
+	rel="stylesheet">
+<!-- My custom styles (optional) -->
+<link
+	th:href="@{/webjars/mdbootstrap-bootstrap-material-design/4.8.8/css/style.css}"
+	rel="stylesheet">
+
+
+<script type="text/javascript"
+	th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+<style>
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand navbar-dark bg-dark">
+		<a class="navbar-brand" href="#"> Spring Boot Application </a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExample" aria-controls="navbarsExample"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExample">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#"> <span
+						th:text="#{top.link.home}" /><span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#"> <span
+						th:text="#{top.link.links}" />
+				</a></li>
+			</ul>
+			<form class="form-inline my-2 my-md-0">
+				<input class="form-control" type="text" placeholder="Search">
+			</form>
+		</div>
+	</nav>
+
+	<div class="row mx-1">
+		<div class="col-md-12 mb-4 mt-2">
+			<div class="card card-image"
+				style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20%2834%29.jpg);">
+				<div
+					class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+					<div>
+						<h4 class="purple-text">
+							<i class="fas fa-baby"></i><strong> Record Application</strong>
+						</h4>
+						<h1 class="card-title py-3 font-weight-bold">
+							<strong><p th:text="#{top.welcome}"></p></strong>
+						</h1>
+						<p class="pb-3">色々技術要素を施行するためのSandboxアプリケーション。まずは色々な情報を記録する機能を実装していく予定である。</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!--Grid column-->
+		<div class="col-md-3 mb-4 mx-2">
+			<div class="card card-image mx-3" style="width: 25rem;">
+				<!--Card image-->
+				<div class="view overlay">
+					<img th:src="@{/images/books.jpg}" width="100%" height="300" alt="">
+					<a href="#">
+						<div class="mask rgba-white-slight"></div>
+					</a>
+				</div>
+
+				<div class="card-body">
+					<!--Title-->
+					<h4 class="card-title">
+						<a href="/book/listAll"
+							class="list-group-item list-group-item-action"><span
+							th:text="#{top.menu.booklist}" /></a>
+					</h4>
+					<!-- Description-->
+					<p class="card-text">読書記録ページ。今まで読んだ書籍の閲覧履歴を一覧表示する。</p>
+				</div>
+			</div>
+		</div>
+			<!--Grid column-->
+			<div class="col-md-3 mb-4 mx-2">
+			<div class="card card-image mx-5" style="width: 25rem;">
+				<!--Card image-->
+				<div class="view overlay">
+					<img
+						src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(15).jpg"
+						width="100%" height="300"> <a href="#">
+						<div class="mask rgba-white-slight"></div>
+					</a>
+				</div>
+				<div class="card-body">
+					<!--Title-->
+					<h4 class="card-title">
+						<a href="/photoSamples/listAll"
+							class="list-group-item list-group-item-action"><span
+							th:text="#{top.menu.photoSamples}" /></a>
+					</h4>
+					<!-- Description-->
+					<p class="card-text">写真の素材(MDBootstrap)の一覧。忘れちゃうのでリンク貼っておく。</p>
+				</div>
+				</div>
+			</div>
+	</div>
+
+	<footer class="container">
+		<p>&copy; E-Kanegea 2020</p>
+	</footer>
+
+</body>
+</html>

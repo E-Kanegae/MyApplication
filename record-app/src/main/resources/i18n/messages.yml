@@ -1,0 +1,86 @@
+# Common Messages
+cmn:
+  msg:
+    returnTop: Home
+    logout: Logout
+# Top Page
+top:
+  welcome: Welocome to My Application.
+  link: 
+    home: Home
+    links: Links
+  menu:
+    booklist: 閲覧書籍メモ
+    photoSamples: 写真素材 
+    imgList: 画像リスト
+# Book Common
+book:
+  btn:
+    register: 登録
+  label:
+    isbn: ISBN
+    category: ジャンル
+    fullName: 書籍名
+    abbName: 略称
+    author: 著者名
+    publisher: 出版社
+    points: 評価
+    brief: 概要
+    cmt: コメント
+    keywords: 印象に残った言葉
+    indexes: 付箋を貼ったページ番号
+    bookmark: 何ページまで読んだか
+    startDate: 読書開始日
+    interruptDate: 読書中断日
+    restartDate: 読書再開日
+    endDate: 読書終了日
+    requiredDays: 所要日数
+    purchaseDate: 購入日
+    price: 値段（表示金額）
+    actualPrice: 購入金額
+    shopName: 購入場所
+    shopUrl: 店舗URL
+    
+# Book List
+booklist:
+  label:
+    title: 閲覧書籍リスト
+    delete: 削除
+  btn:
+    register: 登録
+    delete: 削除
+  msg:
+     nolist: データが一件もありません。 
+    
+# Book Register
+book_register:
+  btn:
+    register: 登録
+  msg:
+    form: 登録画面
+    explanation: 読んでいる、読み終わった書籍に関する情報を登録する画面です。下記のフォームに入力後、登録ボタンを押下してください。 
+    err:
+      validation: 入力項目に誤りがあります。見直してください。
+  label:
+    isbn: ISBN
+    category: ジャンル
+    fullName: 書籍名
+    abbName: 略称
+    author: 著者名
+    publisher: 出版社
+    points: 評価
+    brief: 概要
+    cmt: コメント
+    keywords: 印象に残った言葉
+    indexes: 付箋を貼ったページ番号
+    bookmark: 何ページまで読んだか
+    startDate: 読書開始日（yyyy/MM/dd）
+    interruptDate: 読書中断日（yyyy/MM/dd）
+    restartDate: 読書再開日（yyyy/MM/dd）
+    endDate: 読書終了日（yyyy/MM/dd）
+    requiredDays: 所要日数
+    purchaseDate: 購入日（yyyy/MM/dd）
+    price: 値段（表示金額）
+    actualPrice: 購入金額
+    shopName: 購入場所
+    shopUrl: 店舗URL

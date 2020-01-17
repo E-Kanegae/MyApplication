@@ -1,0 +1,8 @@
+#system properties
+server:
+  port: 8081
+  
+# Google Books API
+booksapi:
+  google:
+    url: https://www.googleapis.com/books/v1/volumes?q=

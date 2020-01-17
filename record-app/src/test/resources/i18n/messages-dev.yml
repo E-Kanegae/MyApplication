@@ -1,0 +1,36 @@
+# Common Messages
+cmn:
+  msg:
+    returnTop: トップ画面へ
+    logout: ログアウト
+# Top Page
+top:
+  welcome: Welocome to My Application.
+  link: 
+    home: Home
+    links: Links
+  menu:
+    booklist: 書籍リスト
+    imgList: 画像リスト
+# Book List
+booklist:
+  btn:
+    register: 登録
+    
+# Book Register
+book_register:
+  btn:
+    register: 登録
+  msg:
+    form: 登録フォーム
+  label:
+    id: ID
+    fullName: 書籍名
+    abbName: 略称
+    author: 著者名
+    points: 採点
+    cmt: コメント
+    purchaseDate: 購入日
+    price: 値段
+    actualPrice: 購入価格
+    shopName: 購入場所
