@@ -19,6 +19,6 @@ public class IndustryIdentify {
 	
 	private String type;
 	
-	private Long identifier;
+	private String identifier;
 
 }

@@ -112,6 +112,8 @@ public class BookInfoServiceTest {
 		return BookInfo.builder()
 				.bookId(BigInteger.ONE)
 				.fullName("父が娘に語る 美しく、深く、壮大で、とんでもなくわかりやすい経済の話。")
+				.category("経済")
+				.startDate(LocalDate.of(2020, 1, 23))
 				.build();				
 	}
 

@@ -1,5 +1,8 @@
+# system properties
 server:
-  port: 8080
+  port: 8880
+
+# spring various settings
 spring:
   profiles: default
 # messages
@@ -7,12 +10,12 @@ spring:
     basename: i18n.messages, i18n.validationMessages
     fallback-to-system-locale: true
     encoding: UTF-8
-  
+
 # Spring Security
   security:
     user: 
       password: password
-  
+
 # If you use the Mongo 3.0 Java driver, spring.data.mongodb.host and spring.data.mongodb.port are not supported. 
 # In such cases, spring.data.mongodb.uri should be used to provide all of the configuration.
 # Settings for Spring Data MongoDB
@@ -27,3 +30,9 @@ spring:
     enabled: true
     cache: false
     enable-spring-el-compiler: true
+
+# individual settings 
+booksapi:
+  host: localhost
+  port: 8881
+  scheme: http

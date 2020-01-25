@@ -24,18 +24,20 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BookInfoForm implements Serializable {
-
+	
+	public static interface Create {}
+	
 	private Long bookId;
 	
 	private Long isbn;
 	
-	@NotNull
+	@NotNull(groups = {Create.class})
 	private String category;
 	
 	@NotNull
 	private String fullName;
 
-	@Size(min=1, max = 20)
+	@Size(min=1, max = 20, groups = {Create.class})
 	private String abbName;
 
 	private String author;
@@ -55,7 +57,7 @@ public class BookInfoForm implements Serializable {
 	private Integer bookmark;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@NotNull
+	@NotNull(groups = {Create.class})
 	private LocalDate startDate;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")

@@ -25,3 +25,10 @@ spring:
     enabled: true
     cache: false
     enable-spring-el-compiler: true
+
+    
+# individual settings 
+booksapi:
+  host: localhost
+  port: 8881
+  scheme: http

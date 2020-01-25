@@ -1,6 +1,11 @@
 package com.example.ek.booksapi.web;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,11 +42,15 @@ public class BooksApiController {
 	public BookInfo[] getBookInfoList(@RequestParam(required = true, value = "title") String title,
 			@RequestParam(required = false, value = "author") String author,
 			@RequestParam(required = false, value = "isbn") String isbn)
-			throws RestClientException, BooksSearchApiIllegalArgumentException {
+			throws RestClientException, BooksSearchApiIllegalArgumentException, UnsupportedEncodingException {
 
 		return booksApiService.findAll(
 				new BookSearchConditionBuilder<GoogleBookSearchApiCondition>(new GoogleBookSearchApiCondition())
-						.title(title).author(author).isbn(isbn).build());
+						.title(decode(title)).author(decode(author)).isbn(decode(isbn)).build());
+	}
+	
+	private String decode(String encoded) throws UnsupportedEncodingException {
+		return StringUtils.hasLength(encoded) ? URLDecoder.decode(encoded, "UTF-8"):null;
 	}
 
 }

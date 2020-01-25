@@ -63,8 +63,11 @@ public class GoogleBooksApiServiceImpl implements BooksApiService {
 	@Override
 	public BookInfo[] findAll(BookSearchCondition condition)
 			throws RestClientException, BooksSearchApiIllegalArgumentException {
-		
-		return responseBuilder.build(((GoogleBookSearchApiResult) find((GoogleBookSearchApiCondition) condition)));
+		GoogleBookSearchApiResult result = (GoogleBookSearchApiResult)find((GoogleBookSearchApiCondition) condition);
+		if(result.getTotalItems().equals(Integer.valueOf(0))) {
+			return null;
+		}
+		return responseBuilder.build(result);
 	}
 
 	private GoogleBookSearchApiResult find(GoogleBookSearchApiCondition condition)

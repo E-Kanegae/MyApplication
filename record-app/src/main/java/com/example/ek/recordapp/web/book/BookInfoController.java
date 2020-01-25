@@ -1,9 +1,10 @@
 package com.example.ek.recordapp.web.book;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.validation.groups.Default;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.ek.recordapp.domain.bean.book.BookInfo;
+import com.example.ek.recordapp.domain.service.book.BookInfoSearchResult;
 import com.example.ek.recordapp.domain.service.book.BookInfoService;
+import com.example.ek.recordapp.web.book.BookInfoForm.Create;
 
 /**
  * record-app
@@ -39,15 +42,15 @@ public class BookInfoController {
 
 	@Autowired
 	private Mapper mapper;
-	
+
 	@ModelAttribute("bookInfoForm")
 	public BookInfoForm addBookInfoForm(Model model) {
 		return ObjectUtils.isEmpty(model.getAttribute("bookInfoForm")) == true ? new BookInfoForm()
 				: (BookInfoForm) model.getAttribute("bookInfoForm");
 	}
-	
+
 	@ModelAttribute("bookCategory")
-	public List<String> addBookCategory(Model model){
+	public List<String> addBookCategory(Model model) {
 		return BOOK_CATEGORY;
 	}
 
@@ -91,9 +94,10 @@ public class BookInfoController {
 	 * @param model
 	 * @return 書籍一覧画面
 	 */
-	@PostMapping("create")
-	public String create(@Validated BookInfoForm form, BindingResult bindingResult, Model model) {
-		if(bindingResult.hasErrors()) {
+	@PostMapping(value = "create", params = "create")
+	public String create(@Validated({ Create.class, Default.class }) BookInfoForm form, 
+			BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("bindingResult", bindingResult);
 			return register(model);
 		}
@@ -112,7 +116,26 @@ public class BookInfoController {
 	public String delete() {
 		return null;
 	}
-	
+
+	/**
+	 * 書籍候補をBooksAPIから取得する処理
+	 * @param form
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 *
+	 */
+	@PostMapping(value = "create", params = "search")
+	public String searchCandidtate(@Validated BookInfoForm form, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("bindingResult", bindingResult);
+			return register(model);
+		}
+		List<BookInfoSearchResult> result = service.searchBookInfoCandidate(
+				form.getIsbn() == null ? null : form.getIsbn().toString(), form.getFullName(), form.getAuthor());
+		return null;
+	}
+
 	/**
 	 * ジャンルのリスト
 	 */
