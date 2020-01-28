@@ -8,16 +8,19 @@ import javax.validation.groups.Default;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ek.recordapp.domain.bean.book.BookInfo;
 import com.example.ek.recordapp.domain.service.book.BookInfoSearchResult;
@@ -40,6 +43,9 @@ public class BookInfoController {
 	@Autowired
 	private BookInfoService service;
 
+	@Autowired
+	private BookInfoHelper helper;
+	
 	@Autowired
 	private Mapper mapper;
 
@@ -94,7 +100,7 @@ public class BookInfoController {
 	 * @param model
 	 * @return 書籍一覧画面
 	 */
-	@PostMapping(value = "create", params = "create")
+	@PostMapping(value = "create")
 	public String create(@Validated({ Create.class, Default.class }) BookInfoForm form, 
 			BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
@@ -125,15 +131,17 @@ public class BookInfoController {
 	 * @return
 	 *
 	 */
-	@PostMapping(value = "create", params = "search")
-	public String searchCandidtate(@Validated BookInfoForm form, BindingResult bindingResult, Model model) {
+	@GetMapping(value = "search", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public  List<BookCandidate> searchCandidtate(@Validated BookInfoForm form, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("bindingResult", bindingResult);
-			return register(model);
+			// TODO: ExceptionHandlerに処理を移譲する。
 		}
 		List<BookInfoSearchResult> result = service.searchBookInfoCandidate(
 				form.getIsbn() == null ? null : form.getIsbn().toString(), form.getFullName(), form.getAuthor());
-		return null;
+		
+		return CollectionUtils.isEmpty(result) ? null : helper.searchResults2Candidates(result);
 	}
 
 	/**

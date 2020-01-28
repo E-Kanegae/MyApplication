@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Candidate Display</title>
+<meta charset="utf-8" />
+</head>
+<body>
+	<div th:fragment="candidate-display">
+		<!-- モーダルの設定 -->
+		<div class="modal" id="candidate-display" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h6 class="modal-title">書籍選択画面</h6>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="閉じる">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table id="modal-candidatelist-table"
+							class="table table-bordered table-hover table-lg">
+							<thead class="thead-light">
+								<tr>
+									<th>画像</th>
+									<th>ISBN番号</th>
+									<th>書籍名</th>
+									<th>著者</th>
+									<th>出版社</th>
+									<th>値段</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<script th:inline="javascript">
+                    /*<![CDATA[*/
+                        var bookdata = null;
+                        var candidatetable = null;
+                        $('#searchcandidates').on("click", function(){
+                            
+                            if(candidatetable == null || candidatetable === null){
+                            	candidatetable = $("#modal-candidatelist-table").DataTable({
+                                    // datatableの設定を変更
+                                    "paging": true,
+                                    "searching": false,
+                                    "filter": true,
+                                    "sort": false,
+                                    "ordering": true,
+                                    "autoWidth": false,
+                                    "scrollX": true,
+                                    "scrollY": 200,
+                                    "stateSave": false,
+                                    "language": {
+                                        "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                                    } ,
+                                    "ajax": { 
+                                    	"url" : "search", 
+                                    	"type" : "GET",
+                                    	"data": function(d) {
+                                    		return $.extend( {}, d, {
+                                    		"isbn" : $('#isbn').val(),
+                                    		"fullName" : $('#fullName').val(),
+                                    		"author" : $('#author').val()});
+                                    	},
+                                        "dataSrc" : '' },
+                                    "columns": [
+                                        { data: "imageLink" },
+                                        { data: "isbn" },
+                                        { data: "title" },
+                                        { data: "author" },
+                                        { data: "publisher" },
+                                        { data: "price" }
+                                    ],
+                                    "columnDefs": [
+                                        { targets: 0, width: 100 },
+                                        { targets: 1, width: 30 },
+                                        { targets: 2, width: 180 },
+                                        { targets: 3, width: 60 },
+                                        { targets: 4, width: 20 },
+                                        { targets: 5, width: 20 },
+                                        {targets:'_all',className : 'dt-head-center'},
+                                    ]
+                                });
+                            } else {
+                            	candidatetable.clear();
+                                bookdata = null;
+                                candidatetable.ajax.reload();
+                            }
+                            
+                            //一覧をクリックした場合
+                            $('#modal-candidatelist-table tbody').on("click", "tr", function() {
+                                if ($(this).find('.dataTables_empty').length == 0) {
+                                    if ( $(this).hasClass('selected') ) {
+                                        $(this).removeClass('selected');
+                                    } else {
+                                    	candidatetable.$('tr.selected').removeClass('selected');
+                                        $(this).addClass('selected');
+                                    }
+                                    bookdata=$('#modal-candidatelist-table').dataTable().fnGetData(this);
+                                }
+                            });
+                        })
+                    /*]]>*/
+                    </script>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary"
+							id="btn-candidate-display">選択</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">キャンセル</button>
+					</div>
+					<!-- /.modal-footer -->
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</body>
+</html>
