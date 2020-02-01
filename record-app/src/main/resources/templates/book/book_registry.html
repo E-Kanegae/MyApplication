@@ -45,23 +45,15 @@
 					</label> <input type="text" class="form-control" id="isbn" name="isbn"
 						th:value="${isbn}" />
 				</div>
-				<!-- ジャンル -->
-				<div class="col-sm-3 mb-3">
-					<label class="control-label" for="category"> <sup
-						title="required">*</sup><span
-						th:text="#{book_register.label.category}" />
-					</label> <select class="form-control" id="category" name="category">
-						<option value="" selected="true"></option>
-						<option th:each="item : ${bookCategory}" th:value="${item}"
-							th:text="${item}" th:selected="${item} == *{category}"></option>
-					</select>
-					<div class="invalid-feedback">
-						<span th:if="${#fields.hasErrors('category')}"
-							th:errors="*{category}" class="help-block"></span>
-					</div>
+				<!-- author -->
+				<div class="col-sm-4 mb-3">
+					<label class="control-label" for="author"><span
+						th:text="#{book_register.label.author}" /> </label> <input type="text"
+						class="form-control" id="author" name="author"
+						th:value="*{author}" />
 				</div>
 			</div>
-
+			
 			<!-- 二行目 -->
 			<div class="row">
 				<!-- fullName -->
@@ -79,9 +71,31 @@
 						</div>
 					</div>
 				</div>
-
+				<div class="col-xl-4">
+					<a class="btn btn-success btn-lg btn-block" id="searchcandidates"
+						name="search" data-toggle="modal" data-target="#candidate-display"><span
+						th:text="#{book_register.btn.search}"></span></a>
+				</div>
+			</div>
+			<!-- 三行目 -->
+			<div class="row">
+			<!-- ジャンル -->
+				<div class="col-sm-3 mb-3">
+					<label class="control-label" for="category"> <sup
+						title="required">*</sup><span
+						th:text="#{book_register.label.category}" />
+					</label> <select class="form-control" id="category" name="category">
+						<option value="" selected="true"></option>
+						<option th:each="item : ${bookCategory}" th:value="${item}"
+							th:text="${item}" th:selected="${item} == *{category}"></option>
+					</select>
+					<div class="invalid-feedback">
+						<span th:if="${#fields.hasErrors('category')}"
+							th:errors="*{category}" class="help-block"></span>
+					</div>
+				</div>
 				<!-- abbName -->
-				<div class="col-lg-4 mb-3">
+				<div class="col-lg-3 mb-3">
 					<label class="control-label" for="abbName"><span
 						th:text="#{book_register.label.abbName}" /> </label> <input type="text"
 						class="form-control" id="abbName" name="abbName"
@@ -90,17 +104,6 @@
 						<span class="alert alert-danger" role="alert"
 							th:errors="*{abbName}"></span>
 					</div>
-				</div>
-			</div>
-
-			<!-- 三行目 -->
-			<div class="row">
-				<!-- author -->
-				<div class="col-sm-4 mb-3">
-					<label class="control-label" for="author"><span
-						th:text="#{book_register.label.author}" /> </label> <input type="text"
-						class="form-control" id="author" name="author"
-						th:value="*{author}" />
 				</div>
 				<!-- publisher -->
 				<div class="col-sm-4 mb-3">
@@ -291,16 +294,11 @@
 			</div>
 
 			<div class="row">
-				<div class="col-xl-6 mb-5">
+				<div class="col-xl-12 mb-5">
 					<button type="submit" class="btn btn-primary btn-lg btn-block"
 						name="create">
 						<span th:text="#{book_register.btn.register}" />
 					</button>
-				</div>
-				<div class="col-xl-6 mb-5">
-					<a class="btn bg-primary btn-lg btn-block" id="searchcandidates"
-						name="search" data-toggle="modal" data-target="#candidate-display"><span
-						th:text="#{book_register.btn.search}"></span></a>
 				</div>
 			</div>
 			<div th:replace="book/candidate_display::candidate-display"></div>

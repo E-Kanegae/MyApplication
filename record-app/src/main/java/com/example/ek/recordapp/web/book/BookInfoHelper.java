@@ -45,7 +45,7 @@ public class BookInfoHelper {
 	}
 	
 	private String array2StringBydelimeter(String[] array) {
-		if(ObjectUtils.isEmpty(array) && array.length == 0) {
+		if(ObjectUtils.isEmpty(array) || array.length == 0) {
 			return null;
 		}
 		return Arrays.asList(array).stream().collect(Collectors.joining(DELIMETER));

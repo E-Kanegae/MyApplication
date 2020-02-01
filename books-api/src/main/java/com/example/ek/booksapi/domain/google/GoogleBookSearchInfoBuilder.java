@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import com.example.ek.booksapi.domain.BookInfoBuilder;
 import com.example.ek.booksapi.domain.BookSearchResult;
@@ -66,8 +67,8 @@ public class GoogleBookSearchInfoBuilder implements BookInfoBuilder {
 				.publisher(v.getPublisher())
 				.publishedDate(v.getPublishedDate())
 				.description(v.getDescription())
-				.smallThumbnail(v.getImageLinks().getSmallThumbnail())
-				.thumbnail(v.getImageLinks().getThumbnail())
+				.smallThumbnail(ObjectUtils.isEmpty(v.getImageLinks()) ? null : v.getImageLinks().getSmallThumbnail())
+				.thumbnail(ObjectUtils.isEmpty(v.getImageLinks()) ? null :v.getImageLinks().getThumbnail())
 				.categories(v.getCategories())
 				.build();
 	}

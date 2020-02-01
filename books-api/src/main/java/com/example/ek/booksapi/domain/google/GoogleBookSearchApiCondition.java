@@ -1,5 +1,7 @@
 package com.example.ek.booksapi.domain.google;
 
+import org.springframework.stereotype.Component;
+
 import com.example.ek.booksapi.domain.BookSearchCondition;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class GoogleBookSearchApiCondition extends BookSearchCondition {
 
 	/**
@@ -39,8 +42,9 @@ public class GoogleBookSearchApiCondition extends BookSearchCondition {
 	
 	/**
 	 * 返される結果の最大数。<br>
-	 * このフィールドに何も設定しないでクエリを発行した場合はデフォルトは10で、最大許容値は40です。
+	 * このフィールドに何も設定しないでクエリを発行した場合はデフォルトは10で、最大許容値は40だそう。
+	 * ここでは40しておく。
 	 */
-	private String maxResults;
+	private String maxResults = "40";
 
 }

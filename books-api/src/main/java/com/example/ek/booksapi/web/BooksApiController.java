@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
+import com.example.ek.booksapi.domain.BookSearchCondition;
 import com.example.ek.booksapi.domain.BookSearchConditionBuilder;
 import com.example.ek.booksapi.domain.BooksApiService;
 import com.example.ek.booksapi.domain.BooksSearchApiIllegalArgumentException;
@@ -29,11 +30,14 @@ public class BooksApiController {
 
 	@Autowired
 	BooksApiService booksApiService;
+	
+	@Autowired
+	BookSearchCondition condition;
 
 	@GetMapping(path = "getBookInfo", produces = "application/json", params = "isbn")
 	public BookInfo getBookInfo(String isbn) throws RestClientException, BooksSearchApiIllegalArgumentException {
 		return booksApiService.findOne(
-				new BookSearchConditionBuilder<GoogleBookSearchApiCondition>(new GoogleBookSearchApiCondition())
+				new BookSearchConditionBuilder<BookSearchCondition>(condition)
 						.isbn(isbn).build());
 	}
 
@@ -44,7 +48,7 @@ public class BooksApiController {
 			throws RestClientException, BooksSearchApiIllegalArgumentException, UnsupportedEncodingException {
 
 		return booksApiService.findAll(
-				new BookSearchConditionBuilder<GoogleBookSearchApiCondition>(new GoogleBookSearchApiCondition())
+				new BookSearchConditionBuilder<BookSearchCondition>(condition)
 						.title(decode(title)).author(decode(author)).isbn(decode(isbn)).build());
 	}
 	

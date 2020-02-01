@@ -56,7 +56,7 @@ booklist:
 book_register:
   btn:
     register: 登録
-    search: isbn, タイトル, 著者から書籍候補を検索
+    search: isbn/タイトル/著者から書籍候補検索
   msg:
     form: 登録画面
     explanation: 読んでいる、読み終わった書籍に関する情報を登録する画面です。下記のフォームに入力後、登録ボタンを押下してください。 

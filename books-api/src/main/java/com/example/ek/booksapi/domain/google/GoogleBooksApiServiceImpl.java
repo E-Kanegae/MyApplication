@@ -32,7 +32,8 @@ public class GoogleBooksApiServiceImpl implements BooksApiService {
 	@Value("${booksapi.google.url}")
 	private String GOOGLE_URL;
 
-	private static final String ADD_PARAM = "+";
+	private static final String ADD_SEARCH_PARAM = "+";
+	private static final String ADD_PARAM = "&";
 	private static final String ADD_PARAM_EQUAL = ":";
 	private static final String DOUBLE_QUOTE = "\"";
 
@@ -98,20 +99,24 @@ public class GoogleBooksApiServiceImpl implements BooksApiService {
 		builder.append(GOOGLE_URL);
 
 		if (StringUtils.hasLength(intitle)) {
-			builder.append(ADD_PARAM + "intitle" + ADD_PARAM_EQUAL + DOUBLE_QUOTE + intitle + DOUBLE_QUOTE);
+			builder.append(ADD_SEARCH_PARAM + "intitle" + ADD_PARAM_EQUAL + DOUBLE_QUOTE + intitle + DOUBLE_QUOTE);
 		}
 
 		if (StringUtils.hasLength(inauthor)) {
-			builder.append(ADD_PARAM + "inauthor" + ADD_PARAM_EQUAL + DOUBLE_QUOTE + inauthor + DOUBLE_QUOTE);
+			builder.append(ADD_SEARCH_PARAM + "inauthor" + ADD_PARAM_EQUAL + DOUBLE_QUOTE + inauthor + DOUBLE_QUOTE);
 		}
 
 		if (StringUtils.hasLength(isbn)) {
-			builder.append(ADD_PARAM + "isbn" + ADD_PARAM_EQUAL + isbn);
+			builder.append(ADD_SEARCH_PARAM + "isbn" + ADD_PARAM_EQUAL + isbn);
 		}
 
 		if (StringUtils.hasLength(inpublisher)) {
-			builder.append(ADD_PARAM + "inpublisher" + ADD_PARAM_EQUAL + DOUBLE_QUOTE + intitle + DOUBLE_QUOTE);
+			builder.append(ADD_SEARCH_PARAM + "inpublisher" + ADD_PARAM_EQUAL + DOUBLE_QUOTE + intitle + DOUBLE_QUOTE);
 		}
+		
+		builder.append(ADD_PARAM + "maxResults=" + gcond.getMaxResults());
+		builder.append(ADD_PARAM + "orderBy=" + "newest" );
+		builder.append(ADD_PARAM + "langRestrict=" + "ja" );			
 
 		return builder.toString();
 
